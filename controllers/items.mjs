@@ -8,7 +8,23 @@ export default function initItemsController(db) {
     }
   };
 
+  const postItem = async (request, response) => {
+    const { price, description, name } = request.body;
+
+    db.Item.create({ price: 10, description, name })
+      .then(({ dataValues }) => {
+        console.log(`[item create]`);
+        console.log(dataValues);
+
+        response.send(dataValues);
+      })
+      .catch(() => {
+        response.sendStatus(500);
+      });
+  };
+
   return {
     index,
+    postItem,
   };
 }

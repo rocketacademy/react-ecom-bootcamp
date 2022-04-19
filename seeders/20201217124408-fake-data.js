@@ -1,4 +1,4 @@
-const faker = require('faker');
+const faker = require("faker");
 
 module.exports = {
   up: async (queryInterface) => {
@@ -15,7 +15,7 @@ module.exports = {
     }
 
     try {
-      const result = await queryInterface.bulkInsert('items', itemsList);
+      const result = await queryInterface.bulkInsert("items", itemsList);
       console.log(result);
     } catch (error) {
       console.log(error);
@@ -23,6 +23,6 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
-    await queryInterface.bulkDelete('items', null, {});
+    await queryInterface.bulkDelete("items", null, {});
   },
 };
