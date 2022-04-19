@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function Items({ items, setItemDetail }) {
   const [selectedItemIndex, setSelectedItemIndex] = useState();
 
-  const setItemSelected = (item, index) => {
+  const setItemSelected = (index) => {
     setItemDetail(index);
     setSelectedItemIndex(index);
   };
@@ -15,8 +15,8 @@ export default function Items({ items, setItemDetail }) {
           <button
             key={item.id}
             type="button"
-            className={index === selectedItemIndex ? 'item selected' : 'item'}
-            onClick={() => setItemSelected(item, index)}
+            className={index === selectedItemIndex ? "item selected" : "item"}
+            onClick={setItemSelected}
           >
             {item.name}
           </button>

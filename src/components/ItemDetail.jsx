@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 export default function ItemDetail({ item, addToCart }) {
   const [quantity, setQuantity] = useState(1);
@@ -12,7 +12,7 @@ export default function ItemDetail({ item, addToCart }) {
   };
 
   const detailAddCart = () => {
-    addToCart(item, quantity);
+    addToCart({ ...item, quantity });
   };
 
   return (
