@@ -12,7 +12,7 @@ export default function ItemDetail({ item, addToCart }) {
   };
 
   const detailAddCart = () => {
-    addToCart(item, quantity);
+    addToCart({ ...item, quantity });
   };
 
   return (

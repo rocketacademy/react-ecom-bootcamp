@@ -5,11 +5,14 @@ import Cart from "./components/Cart.jsx";
 import Items from "./components/Items.jsx";
 import ItemDetail from "./components/ItemDetail.jsx";
 
-const ItemForm = ({ getItems }) => {
+const ItemForm = ({ refreshItems }) => {
   const [name, setName] = useState("ss");
   const [description, setDescription] = useState("desc");
   const [price, setPrice] = useState("desc");
 
+  const handleSubmit = () => {
+    axios.post("/item", { name, description, price }).then(refreshItems);
+  };
   return (
     <>
       <input
@@ -33,14 +36,7 @@ const ItemForm = ({ getItems }) => {
         }}
         value={price}
       ></input>
-      <input
-        type="submit"
-        onClick={() => {
-          axios
-            .post("/item", { name, description, price })
-            .then(getItems);
-        }}
-      ></input>
+      <input type="submit" onClick={handleSubmit}></input>
     </>
   );
 };
@@ -50,18 +46,16 @@ export default function App() {
   const [cart, setCart] = useState([]);
   const [selectedItemIndex, setSelectedItemIndex] = useState();
 
-  const addToCart = (item, quantity) => {
-    const cartItem = { quantity, ...item };
-    setCart([cartItem, ...cart]);
+  const addToCart = (item) => {
+    setCart([item, ...cart]);
   };
 
   const setItemDetail = (itemIndex) => {
     setSelectedItemIndex(itemIndex);
   };
 
-  const getItems = () => {
+  const refreshItems = () => {
     axios.get("/items").then((result) => {
-      console.log(result);
       setItems(() => result.data.items);
     });
   };
@@ -74,13 +68,13 @@ export default function App() {
         <h1 className="page-title">Wow Shopping!</h1>
         <Items items={items} setItemDetail={setItemDetail} />
         {items.length === 0 && (
-          <button type="button" onClick={getItems}>
+          <button type="button" onClick={refreshItems}>
             Get Items
           </button>
         )}
         <ItemDetail item={selectedItem} addToCart={addToCart} />
         <Cart items={cart} />
-        <ItemForm getItems={getItems} />
+        <ItemForm refreshItems={refreshItems} />
       </div>
     </div>
   );

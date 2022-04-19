@@ -3,7 +3,7 @@ import React, { useState } from "react";
 export default function Items({ items, setItemDetail }) {
   const [selectedItemIndex, setSelectedItemIndex] = useState();
 
-  const setItemSelected = (item, index) => {
+  const setItemSelected = (index) => {
     setItemDetail(index);
     setSelectedItemIndex(index);
   };
@@ -16,7 +16,7 @@ export default function Items({ items, setItemDetail }) {
             key={item.id}
             type="button"
             className={index === selectedItemIndex ? "item selected" : "item"}
-            onClick={() => setItemSelected(item, index)}
+            onClick={setItemSelected}
           >
             {item.name}
           </button>

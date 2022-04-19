@@ -5,7 +5,7 @@ export default function Cart({ items }) {
     return <div />;
   }
   const subTotal = items.reduce(
-    (acc, item) => Number(acc) + Number(item.price),
+    (acc, item) => Number(acc) + Number(item.price) * Number(item.quantity),
     0
   );
 
@@ -18,7 +18,7 @@ export default function Cart({ items }) {
       <div className="cart">
         <h2>Cart</h2>
         {items.map((item, index) => (
-          <div key={item.id}>
+          <div key={item.name}>
             {item.quantity} | {item.name} ${item.price}
           </div>
         ))}
